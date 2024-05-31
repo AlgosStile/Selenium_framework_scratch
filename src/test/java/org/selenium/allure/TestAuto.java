@@ -18,7 +18,7 @@ public class TestAuto {
         StepDefinitions steps = new StepDefinitions(driver);
         steps.completeOrder();
 
-        // Продолжить завтра!
+        driver.get("https://ya.ru");
 
         driver.quit();
     }
