@@ -27,6 +27,12 @@ public class HomePage extends BasicPage {
     @FindBy(how = How.XPATH, using = "//button[text()='Применить']")
     private WebElement applyButton;
 
+    @FindBy(how = How.XPATH, using = "//div[@class='product']//button[text()='В корзину']")
+    private WebElement addToCartButton;
+
+    @FindBy(how = How.ID, using = "cart")
+    private WebElement cartButton;
+
     @FindBy(how = How.ID, using = "submit")
     private WebElement submitButton;
 
@@ -60,5 +66,12 @@ public class HomePage extends BasicPage {
 
     public void submitOrder() {
         submitButton.click();
+    }
+    public void addFirstProductToCart() {
+        addToCartButton.click();
+    }
+
+    public void goToCart() {
+        cartButton.click();
     }
 }

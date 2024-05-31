@@ -19,7 +19,7 @@ public class TestAuto {
         steps.completeOrder();
 
         // Продолжить завтра!
+
+        driver.quit();
     }
-
-
 }

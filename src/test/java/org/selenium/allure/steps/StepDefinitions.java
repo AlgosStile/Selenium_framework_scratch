@@ -2,6 +2,7 @@ package org.selenium.allure.steps;
 
 import org.openqa.selenium.WebDriver;
 import org.selenium.allure.config.UserConfig;
+import org.selenium.allure.pages.CartPage;
 import org.selenium.allure.pages.HomePage;
 import org.selenium.allure.pages.CheckoutPage;
 
@@ -9,11 +10,12 @@ public class StepDefinitions {
     private WebDriver driver;
     private HomePage homePage;
     private CheckoutPage checkoutPage;
-
+    private CartPage cartPage;
     public StepDefinitions(WebDriver driver) {
         this.driver = driver;
         homePage = new HomePage(driver);
         checkoutPage = new CheckoutPage(driver);
+        cartPage = new CartPage(driver);
     }
 
     public void completeOrder() {
@@ -22,6 +24,12 @@ public class StepDefinitions {
         homePage.selectColor("Белый");
         homePage.selectMemory("8 Гб");
         homePage.applyFilters();
+        homePage.addFirstProductToCart();
+        homePage.goToCart();
+        cartPage.increaseProductQuantity();
+        cartPage.proceedToCheckout();
+        checkoutPage.selectPaymentMethod("Наличными при получении");
+        checkoutPage.selectDeliveryMethod("Самовывоз бесплатно");
 
         checkoutPage.goToCheckout();
 
@@ -34,6 +42,4 @@ public class StepDefinitions {
         );
 
     }
-
-
 }

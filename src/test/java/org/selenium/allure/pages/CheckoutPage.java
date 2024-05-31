@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.ui.Select;
 
 public class CheckoutPage extends BasicPage {
 
@@ -20,7 +21,11 @@ public class CheckoutPage extends BasicPage {
     @FindBy(how = How.ID, using = "submit")
     private WebElement submitButton;
 
+    @FindBy(how = How.ID, using = "payment-method")
+    private WebElement paymentMethodSelect;
 
+    @FindBy(how = How.ID, using = "delivery-method")
+    private WebElement deliveryMethodSelect;
     public CheckoutPage(WebDriver driver) {
         super(driver);
     }
@@ -38,5 +43,14 @@ public class CheckoutPage extends BasicPage {
         driver.get("https://algosstile.github.io/vue-app/checkout.html");
     }
 
-    // еще...
+    public void selectPaymentMethod(String paymentMethod) {
+        new Select(paymentMethodSelect).selectByVisibleText(paymentMethod);
+
+    }
+
+    public void selectDeliveryMethod(String deliveryMethod) {
+        new Select(deliveryMethodSelect).selectByVisibleText(deliveryMethod);
+
+    }
+
 }
