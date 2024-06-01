@@ -32,12 +32,12 @@ public class StepDefinitions {
         homePage.goToCart();
         cartPage.increaseProductQuantity();
         cartPage.proceedToCheckout();
+        cartPage.increaseProductQuantity();
         checkoutPage.selectPaymentMethod("Наличными при получении");
         checkoutPage.selectDeliveryMethod("Самовывоз бесплатно");
         checkoutPage.selectPaymentMethod("Картой при получении");
         checkoutPage.selectDeliveryMethod("Курьером");
         checkoutPage.goToCheckout();
-        cartPage.increaseProductQuantity();
         checkoutPage.selectFirstAvailableProduct();
         checkoutPage.proceedToCheckout();
 

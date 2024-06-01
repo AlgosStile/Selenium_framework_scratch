@@ -30,9 +30,6 @@ public class CartPage extends BasicPage {
         checkoutButton.click();
     }
 
-    public void selectFirstProduct() {
-        selectProductButton.click();
-    }
     public void setProductQuantity(int quantity) {
         WebElement quantityInput = driver.findElement(By.xpath("//input[@type='text']"));
         quantityInput.clear();
