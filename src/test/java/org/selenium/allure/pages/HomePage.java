@@ -36,6 +36,7 @@ public class HomePage extends BasicPage {
     @FindBy(how = How.ID, using = "submit")
     private WebElement submitButton;
 
+
     public HomePage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);

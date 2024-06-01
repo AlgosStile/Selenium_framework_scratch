@@ -5,17 +5,20 @@ import org.selenium.allure.config.UserConfig;
 import org.selenium.allure.pages.CartPage;
 import org.selenium.allure.pages.HomePage;
 import org.selenium.allure.pages.CheckoutPage;
+import org.selenium.allure.pages.YandexSearchPage;
 
 public class StepDefinitions {
     private WebDriver driver;
     private HomePage homePage;
     private CheckoutPage checkoutPage;
     private CartPage cartPage;
+    private YandexSearchPage yandexSearchPage;
     public StepDefinitions(WebDriver driver) {
         this.driver = driver;
         homePage = new HomePage(driver);
         checkoutPage = new CheckoutPage(driver);
         cartPage = new CartPage(driver);
+        yandexSearchPage = new YandexSearchPage(driver);
     }
 
     public void completeOrder() {
@@ -30,6 +33,11 @@ public class StepDefinitions {
         cartPage.proceedToCheckout();
         checkoutPage.selectPaymentMethod("Наличными при получении");
         checkoutPage.selectDeliveryMethod("Самовывоз бесплатно");
+        cartPage.increaseProductQuantity();
+        cartPage.proceedToCheckout();
+
+        checkoutPage.selectPaymentMethodCash();
+        checkoutPage.selectDeliveryMethodPickup();
 
         checkoutPage.goToCheckout();
 
@@ -40,6 +48,22 @@ public class StepDefinitions {
                 UserConfig.USER_EMAIL,
                 UserConfig.USER_COMMENT
         );
+        boolean isOrderDetailsCorrect = checkoutPage.verifyOrderDetails(
+                UserConfig.USER_NAME,
+                UserConfig.USER_ADRESS,
+                UserConfig.USER_PHONE,
+                UserConfig.USER_EMAIL,
+                UserConfig.USER_COMMENT
+        );
 
+        if (!isOrderDetailsCorrect) {
+            throw new AssertionError("Данные заказа не совпадают с введенными данными.");
+        }
+
+
+    }
+
+    public void searchOnYandex(String query) {
+        yandexSearchPage.searchFor(query);
     }
 }

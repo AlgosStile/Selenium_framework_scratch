@@ -1,5 +1,6 @@
 package org.selenium.allure.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -38,7 +39,19 @@ public class CheckoutPage extends BasicPage {
         commentField.sendKeys(comment);
         submitButton.click();
     }
+    public boolean verifyOrderDetails(String fio, String address, String phone, String email, String comment) {
+        WebElement fioInfo = driver.findElement(By.id("order-fio"));
+        WebElement addressInfo = driver.findElement(By.id("order-address"));
+        WebElement phoneInfo = driver.findElement(By.id("order-phone"));
+        WebElement emailInfo = driver.findElement(By.id("order-email"));
+        WebElement commentInfo = driver.findElement(By.id("order-comment"));
 
+        return fioInfo.getText().equals(fio) &&
+                addressInfo.getText().equals(address) &&
+                phoneInfo.getText().equals(phone) &&
+                emailInfo.getText().equals(email) &&
+                commentInfo.getText().equals(comment);
+    }
     public void goToCheckout() {
         driver.get("https://algosstile.github.io/vue-app/checkout.html");
     }
@@ -51,6 +64,13 @@ public class CheckoutPage extends BasicPage {
     public void selectDeliveryMethod(String deliveryMethod) {
         new Select(deliveryMethodSelect).selectByVisibleText(deliveryMethod);
 
+    }
+    public void selectPaymentMethodCash() {
+        new Select(paymentMethodSelect).selectByVisibleText("Наличными при получении");
+    }
+
+    public void selectDeliveryMethodPickup() {
+        new Select(deliveryMethodSelect).selectByVisibleText("Самовывоз бесплатно");
     }
 
 }
