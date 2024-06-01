@@ -65,7 +65,7 @@ public class CheckoutPage extends BasicPage {
         List<WebElement> products = driver.findElements(By.cssSelector(".product-item"));
         if (!products.isEmpty()) {
             WebElement firstProduct = products.get(0);
-            WebElement selectButton = firstProduct.findElement(By.xpath(".//button[text()='Выбрать']"));
+            WebElement selectButton = firstProduct.findElement(By.cssSelector(".button--primery"));
             selectButton.click();
         } else {
             throw new AssertionError("Товары не найдены.");

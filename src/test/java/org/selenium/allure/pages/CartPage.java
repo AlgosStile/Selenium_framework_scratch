@@ -8,7 +8,7 @@ import org.openqa.selenium.support.How;
 
 public class CartPage extends BasicPage {
 
-    @FindBy(how = How.XPATH, using = "//button[text()='+']")
+    @FindBy(how = How.XPATH, using = "//button[@aria-label='Добавить один товар']")
     private WebElement increaseQuantityButton;
 
     @FindBy(how = How.XPATH, using = "//button[text()='Оформить заказ']")
@@ -27,7 +27,7 @@ public class CartPage extends BasicPage {
     }
 
     public void setProductQuantity(int quantity) {
-        WebElement quantityInput = driver.findElement(By.xpath("//input[@type='text']"));
+        WebElement quantityInput = driver.findElement(By.xpath("//button[@aria-label='Добавить один товар']"));
         quantityInput.clear();
         quantityInput.sendKeys(String.valueOf(quantity));
     }

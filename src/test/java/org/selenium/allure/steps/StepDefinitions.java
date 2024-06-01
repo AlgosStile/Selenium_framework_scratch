@@ -23,7 +23,7 @@ public class StepDefinitions {
     public void completeOrder() {
         homePage.selectProductCategory("Телефоны");
         homePage.setPriceRange(1000, 30000);
-        homePage.selectColor("Белый");
+        homePage.selectProductWithColor("rgb(250, 250, 250)");
         homePage.selectMemory("8 Гб");
         homePage.applyFilters();
         homePage.addFirstProductToCart();
@@ -38,7 +38,6 @@ public class StepDefinitions {
         checkoutPage.selectDeliveryMethod("Курьером");
         checkoutPage.goToCheckout();
         checkoutPage.selectFirstAvailableProduct();
-        checkoutPage.proceedToCheckout();
         checkoutPage.proceedToCheckout();
 
 

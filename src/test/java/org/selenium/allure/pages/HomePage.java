@@ -1,5 +1,6 @@
 package org.selenium.allure.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -40,7 +41,7 @@ public class HomePage extends BasicPage {
     }
 
     public void selectProductCategory(String category) {
-        new Select(productCategory).selectByVisibleText(category);
+        new Select(driver.findElement(By.id("3"))).selectByVisibleText(category);
     }
 
     public void setPriceRange(int minPrice, int maxPrice) {
@@ -50,8 +51,10 @@ public class HomePage extends BasicPage {
         maxPriceInput.sendKeys(String.valueOf(maxPrice));
     }
 
-    public void selectColor(String color) {
-        new Select(colorSelect).selectByVisibleText(color);
+    public void selectProductWithColor(String colorValue) {
+        WebElement colorPicker = driver.findElement(By.cssSelector("#color"));
+        colorPicker.click();
+        driver.findElement(By.cssSelector("[style*='background-color: " + colorValue + "']#fafafa")).click();
     }
 
     public void selectMemory(String memory) {
