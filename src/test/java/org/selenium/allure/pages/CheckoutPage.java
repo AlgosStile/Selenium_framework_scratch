@@ -13,18 +13,24 @@ import java.time.Duration;
 
 public class CheckoutPage extends BasicPage {
 
-    @FindBy(how = How.ID, using = "fio")
+    @FindBy(how = How.XPATH, using = "//input[@placeholder='Введите ваше полное имя']")
     private WebElement fioField;
-    @FindBy(how = How.ID, using = "address")
+
+    @FindBy(how = How.NAME, using = "address")
     private WebElement addressField;
-    @FindBy(how = How.ID, using = "phone")
+
+    @FindBy(how = How.NAME, using = "phone")
     private WebElement phoneField;
-    @FindBy(how = How.ID, using = "email")
+
+    @FindBy(how = How.NAME, using = "email")
     private WebElement emailField;
-    @FindBy(how = How.ID, using = "comment")
+
+    @FindBy(how = How.CSS, using = "textarea.form__input.form__input--area")
     private WebElement commentField;
-    @FindBy(how = How.ID, using = "submit")
+
+    @FindBy(how = How.CSS, using = "button.cart__button.button.button--primery")
     private WebElement submitButton;
+
 
     public CheckoutPage(WebDriver driver) {
         super(driver);
