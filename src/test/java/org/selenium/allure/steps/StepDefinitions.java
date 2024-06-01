@@ -5,20 +5,20 @@ import org.selenium.allure.config.UserConfig;
 import org.selenium.allure.pages.CartPage;
 import org.selenium.allure.pages.CheckoutPage;
 import org.selenium.allure.pages.HomePage;
-import org.selenium.allure.pages.YandexSearchPage;
+import org.selenium.allure.pages.GoogleSearchPage;
 
 
 public class StepDefinitions {
     private final HomePage homePage;
     private final CheckoutPage checkoutPage;
     private final CartPage cartPage;
-    private final YandexSearchPage yandexSearchPage;
+    private final GoogleSearchPage yandexSearchPage;
 
     public StepDefinitions(WebDriver driver) {
         homePage = new HomePage(driver);
         checkoutPage = new CheckoutPage(driver);
         cartPage = new CartPage(driver);
-        yandexSearchPage = new YandexSearchPage(driver);
+        yandexSearchPage = new GoogleSearchPage(driver);
     }
 
     public void completeOrder() throws InterruptedException {

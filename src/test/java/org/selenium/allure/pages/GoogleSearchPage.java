@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-public class YandexSearchPage extends BasicPage {
+public class GoogleSearchPage extends BasicPage {
 
     @FindBy(how = How.ID, using = "text")
     private WebElement searchInput;
@@ -13,7 +13,7 @@ public class YandexSearchPage extends BasicPage {
     @FindBy(how = How.XPATH, using = "//button[@type='submit']")
     private WebElement searchButton;
 
-    public YandexSearchPage(WebDriver driver) {
+    public GoogleSearchPage(WebDriver driver) {
         super(driver);
     }
 

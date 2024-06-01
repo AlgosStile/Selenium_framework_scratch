@@ -26,18 +26,18 @@ public class TestAuto {
 
         steps.completeOrder();
 
-        ((JavascriptExecutor) driver).executeScript("window.open()");
+        ((JavascriptExecutor) driver).executeScript("window.open()");//15
         ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(1));
         driver.get("https://www.google.ru/");
 
-        WebElement searchBox = driver.findElement(By.xpath("//textarea[@name='q']"));
+        WebElement searchBox = driver.findElement(By.xpath("//textarea[@name='q']"));//16
         searchBox.sendKeys("Купить последнюю модель мобильного телефона Samsung за 100.000 руб");
         WebElement searchButton = driver.findElement(By.xpath("/html/body/div[1]/div[3]/form/div[1]/div[1]/div[4]/center/input[1]"));
 
-        searchButton.click();
+        searchButton.click();//17
 
-        Thread.sleep(5000);
+        Thread.sleep(5000);//18
         driver.close();
         driver.switchTo().window(tabs.get(0));
         driver.quit();
