@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
@@ -21,21 +20,8 @@ public class HomePage extends BasicPage {
     @FindBy(how = How.NAME, using = "max-price")
     private WebElement maxPriceInput;
 
-    @FindBy(how = How.ID, using = "color")
-    private WebElement colorSelect;
-
-    @FindBy(how = How.ID, using = "memory")
-    private WebElement memorySelect;
-
     @FindBy(how = How.XPATH, using = "//button[text()='Применить']")
     private WebElement applyButton;
-
-    @FindBy(how = How.XPATH, using = "//div[@class='product']//button[text()='В корзину']")
-    private WebElement addToCartButton;
-
-    @FindBy(how = How.ID, using = "cart")
-    private WebElement cartButton;
-
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -82,11 +68,11 @@ public class HomePage extends BasicPage {
         WebElement cartButton = driver.findElement(By.cssSelector("button.button--primery"));
         cartButton.click();
     }
+
     public void goToCartHeader() {
         WebElement cartIcon = driver.findElement(By.cssSelector("a.header__cart"));
-        JavascriptExecutor executor = (JavascriptExecutor)driver;
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click();", cartIcon);
     }
-
 
 }

@@ -14,10 +14,9 @@ public class TestAuto {
     private static WebDriver driver;
 
     @Test
-    public void testOrderFlow() {
+    public void testOrderFlow() throws InterruptedException {
         System.setProperty("webdriver.chrome.driver", "D:\\Program Files\\webdrivers\\chromedriver.exe");
         driver = new ChromeDriver();
-
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.get("https://algosstile.github.io/vue-app/index.html");
 

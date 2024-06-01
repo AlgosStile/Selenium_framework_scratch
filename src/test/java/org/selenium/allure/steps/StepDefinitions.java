@@ -1,13 +1,15 @@
 package org.selenium.allure.steps;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.selenium.allure.config.UserConfig;
 import org.selenium.allure.pages.CartPage;
 import org.selenium.allure.pages.CheckoutPage;
 import org.selenium.allure.pages.HomePage;
 import org.selenium.allure.pages.YandexSearchPage;
 
-public class StepDefinitions {
+
+public class StepDefinitions extends UserConfig{
     private final HomePage homePage;
     private final CheckoutPage checkoutPage;
     private final CartPage cartPage;
@@ -20,7 +22,7 @@ public class StepDefinitions {
         yandexSearchPage = new YandexSearchPage(driver);
     }
 
-    public void completeOrder() {
+    public void completeOrder() throws InterruptedException {
         homePage.setPriceRange(1000, 30000);//1
         homePage.selectProductWithColor("rgb(250, 250, 250)");//2
         homePage.selectMemory("8");//3
@@ -33,12 +35,7 @@ public class StepDefinitions {
         cartPage.proceedToCheckout();//10
         checkoutPage.selectPaymentMethod("Наличными при получении");//11
         checkoutPage.selectDeliveryMethod("Самовывоз бесплатно");//12
-        checkoutPage.goToCheckout();
-
-
-        checkoutPage.selectDeliveryMethodPickup();
-        checkoutPage.goToCheckout();
-
+        wait(5000);
         checkoutPage.fillOrderForm(
                 UserConfig.USER_NAME,
                 UserConfig.USER_ADRESS,
@@ -57,7 +54,10 @@ public class StepDefinitions {
         if (!isOrderDetailsCorrect) {
             throw new AssertionError("Данные заказа не совпадают с введенными данными.");
         }
+
+        checkoutPage.goToCheckout();
     }
+
 
     public void searchOnYandex(String query) {
         yandexSearchPage.searchFor(query);

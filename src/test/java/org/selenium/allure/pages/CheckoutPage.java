@@ -6,9 +6,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.List;
+import java.time.Duration;
 
 public class CheckoutPage extends BasicPage {
 
@@ -25,11 +26,11 @@ public class CheckoutPage extends BasicPage {
     @FindBy(how = How.ID, using = "submit")
     private WebElement submitButton;
 
-    @FindBy(how = How.ID, using = "payment-method")
-    private WebElement paymentMethodSelect;
+//    @FindBy(how = How.ID, using = "payment-method")
+//    private WebElement paymentMethodSelect;
 
-    @FindBy(how = How.ID, using = "delivery-method")
-    private WebElement deliveryMethodSelect;
+//    @FindBy(how = How.ID, using = "delivery-method")
+//    private WebElement deliveryMethodSelect;
 
     public CheckoutPage(WebDriver driver) {
         super(driver);
@@ -40,13 +41,31 @@ public class CheckoutPage extends BasicPage {
     }
 
     public void fillOrderForm(String fio, String address, String phone, String email, String comment) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(fioField));
+        fioField.clear();
         fioField.sendKeys(fio);
+
+        wait.until(ExpectedConditions.visibilityOf(addressField));
+        addressField.clear();
         addressField.sendKeys(address);
+
+        wait.until(ExpectedConditions.visibilityOf(phoneField));
+        phoneField.clear();
         phoneField.sendKeys(phone);
+
+        wait.until(ExpectedConditions.visibilityOf(emailField));
+        emailField.clear();
         emailField.sendKeys(email);
+
+        wait.until(ExpectedConditions.visibilityOf(commentField));
+        commentField.clear();
         commentField.sendKeys(comment);
+
+        wait.until(ExpectedConditions.elementToBeClickable(submitButton));
         submitButton.click();
     }
+
 
     public boolean verifyOrderDetails(String fio, String address, String phone, String email, String comment) {
         WebElement fioInfo = driver.findElement(By.id("order-fio"));
@@ -62,17 +81,6 @@ public class CheckoutPage extends BasicPage {
                 commentInfo.getText().equals(comment);
     }
 
-//    public void selectFirstAvailableProduct() {
-//        List<WebElement> products = driver.findElements(By.cssSelector(".product-item"));
-//        if (!products.isEmpty()) {
-//            WebElement firstProduct = products.get(0);
-//            WebElement selectButton = firstProduct.findElement(By.cssSelector(".button--primery"));
-//            selectButton.click();
-//        } else {
-//            throw new AssertionError("Товары не найдены.");
-//        }
-//    }
-
 
     public void selectPaymentMethod(String paymentMethod) {
         WebElement paymentMethodLabel = driver.findElement(By.xpath("//label[contains(.,'Наличными при получении')]"));
@@ -80,14 +88,10 @@ public class CheckoutPage extends BasicPage {
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", paymentMethodLabel);
     }
 
-
-
-
     public void selectDeliveryMethod(String deliveryMethod) {
-        WebElement deliveryMethodOption = driver.findElement(By.xpath("//span[contains(text(),'Самовывоз') and contains(text(),'бесплатно')]/ancestor::label/input[@type='radio']"));
+        WebElement deliveryMethodOption = driver.findElement(By.xpath("//label[contains(.,'Самовывоз')]"));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", deliveryMethodOption);
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", deliveryMethodOption);
     }
-
 
 }
