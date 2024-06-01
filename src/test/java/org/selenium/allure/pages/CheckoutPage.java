@@ -7,6 +7,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.List;
+
 public class CheckoutPage extends BasicPage {
 
     @FindBy(how = How.ID, using = "fio")
@@ -30,6 +32,9 @@ public class CheckoutPage extends BasicPage {
     public CheckoutPage(WebDriver driver) {
         super(driver);
     }
+    public void goToCheckout() {
+        driver.get("https://algosstile.github.io/vue-app/index.html#/cart.html");
+    }
 
     public void fillOrderForm(String fio, String address, String phone, String email, String comment) {
         fioField.sendKeys(fio);
@@ -52,9 +57,17 @@ public class CheckoutPage extends BasicPage {
                 emailInfo.getText().equals(email) &&
                 commentInfo.getText().equals(comment);
     }
-    public void goToCheckout() {
-        driver.get("https://algosstile.github.io/vue-app/checkout.html");
+    public void selectFirstAvailableProduct() {
+        List<WebElement> products = driver.findElements(By.cssSelector(".product-item"));
+        if (!products.isEmpty()) {
+            WebElement firstProduct = products.get(0);
+            WebElement selectButton = firstProduct.findElement(By.xpath(".//button[text()='Выбрать']"));
+            selectButton.click();
+        } else {
+            throw new AssertionError("Товары не найдены.");
+        }
     }
+
 
     public void selectPaymentMethod(String paymentMethod) {
         new Select(paymentMethodSelect).selectByVisibleText(paymentMethod);
@@ -72,5 +85,9 @@ public class CheckoutPage extends BasicPage {
     public void selectDeliveryMethodPickup() {
         new Select(deliveryMethodSelect).selectByVisibleText("Самовывоз бесплатно");
     }
+    public void proceedToCheckout() {
+        submitButton.click();
+    }
+
 
 }

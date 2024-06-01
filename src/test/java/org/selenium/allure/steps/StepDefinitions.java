@@ -3,8 +3,8 @@ package org.selenium.allure.steps;
 import org.openqa.selenium.WebDriver;
 import org.selenium.allure.config.UserConfig;
 import org.selenium.allure.pages.CartPage;
-import org.selenium.allure.pages.HomePage;
 import org.selenium.allure.pages.CheckoutPage;
+import org.selenium.allure.pages.HomePage;
 import org.selenium.allure.pages.YandexSearchPage;
 
 public class StepDefinitions {
@@ -13,6 +13,7 @@ public class StepDefinitions {
     private CheckoutPage checkoutPage;
     private CartPage cartPage;
     private YandexSearchPage yandexSearchPage;
+
     public StepDefinitions(WebDriver driver) {
         this.driver = driver;
         homePage = new HomePage(driver);
@@ -33,12 +34,16 @@ public class StepDefinitions {
         cartPage.proceedToCheckout();
         checkoutPage.selectPaymentMethod("Наличными при получении");
         checkoutPage.selectDeliveryMethod("Самовывоз бесплатно");
+        checkoutPage.selectPaymentMethod("Картой при получении");
+        checkoutPage.selectDeliveryMethod("Курьером");
+        checkoutPage.goToCheckout();
         cartPage.increaseProductQuantity();
-        cartPage.proceedToCheckout();
+        checkoutPage.selectFirstAvailableProduct();
+        checkoutPage.proceedToCheckout();
+
 
         checkoutPage.selectPaymentMethodCash();
         checkoutPage.selectDeliveryMethodPickup();
-
         checkoutPage.goToCheckout();
 
         checkoutPage.fillOrderForm(
@@ -59,8 +64,6 @@ public class StepDefinitions {
         if (!isOrderDetailsCorrect) {
             throw new AssertionError("Данные заказа не совпадают с введенными данными.");
         }
-
-
     }
 
     public void searchOnYandex(String query) {

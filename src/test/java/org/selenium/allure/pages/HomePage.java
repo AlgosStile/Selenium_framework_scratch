@@ -1,11 +1,14 @@
 package org.selenium.allure.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+
+import java.util.List;
 
 public class HomePage extends BasicPage {
 
@@ -33,15 +36,11 @@ public class HomePage extends BasicPage {
     @FindBy(how = How.ID, using = "cart")
     private WebElement cartButton;
 
-    @FindBy(how = How.ID, using = "submit")
-    private WebElement submitButton;
-
 
     public HomePage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
-
     public void selectProductCategory(String category) {
         new Select(productCategory).selectByVisibleText(category);
     }
@@ -65,9 +64,6 @@ public class HomePage extends BasicPage {
         applyButton.click();
     }
 
-    public void submitOrder() {
-        submitButton.click();
-    }
     public void addFirstProductToCart() {
         addToCartButton.click();
     }
