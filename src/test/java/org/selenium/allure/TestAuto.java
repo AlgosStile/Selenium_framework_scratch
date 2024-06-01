@@ -21,23 +21,16 @@ public class TestAuto {
         StepDefinitions steps = new StepDefinitions(driver);
         steps.completeOrder();
 
-        driver.get("https://ya.ru");
 
-        driver.quit();
-    }
-
-    @Test
-    public void testYandexSearch() {
-        // Открытие нового окна
-        ((JavascriptExecutor)driver).executeScript("window.open()");
+        ((JavascriptExecutor) driver).executeScript("window.open()");
         ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(1));
-
-        // Поиск Яндексе
         driver.get("https://ya.ru");
-        StepDefinitions steps = new StepDefinitions(driver);
         steps.searchOnYandex("купить последнюю модель samsung за 100000 руб");
+        driver.close();
 
+        driver.switchTo().window(tabs.get(0));
+        driver.get("https://algosstile.github.io/vue-app/index.html");
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
@@ -45,5 +38,4 @@ public class TestAuto {
         }
         driver.quit();
     }
-
 }
