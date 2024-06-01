@@ -10,10 +10,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 public class HomePage extends BasicPage {
-
-    @FindBy(how = How.ID, using = "product-category")
-    private WebElement productCategory;
-
     @FindBy(how = How.NAME, using = "min-price")
     private WebElement minPriceInput;
 

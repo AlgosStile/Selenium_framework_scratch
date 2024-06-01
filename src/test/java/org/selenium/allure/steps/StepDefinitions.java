@@ -1,7 +1,6 @@
 package org.selenium.allure.steps;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.selenium.allure.config.UserConfig;
 import org.selenium.allure.pages.CartPage;
 import org.selenium.allure.pages.CheckoutPage;
@@ -9,7 +8,7 @@ import org.selenium.allure.pages.HomePage;
 import org.selenium.allure.pages.YandexSearchPage;
 
 
-public class StepDefinitions extends UserConfig{
+public class StepDefinitions {
     private final HomePage homePage;
     private final CheckoutPage checkoutPage;
     private final CartPage cartPage;
@@ -35,7 +34,6 @@ public class StepDefinitions extends UserConfig{
         cartPage.proceedToCheckout();//10
         checkoutPage.selectPaymentMethod("Наличными при получении");//11
         checkoutPage.selectDeliveryMethod("Самовывоз бесплатно");//12
-        wait(5000);
         checkoutPage.fillOrderForm(
                 UserConfig.USER_NAME,
                 UserConfig.USER_ADRESS,

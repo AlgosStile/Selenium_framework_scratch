@@ -32,11 +32,11 @@ public class TestAuto {
 
         steps.searchOnYandex("купить последнюю модель samsung за 100000 руб");
 
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Thread.sleep(5000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
 
         driver.close();
 

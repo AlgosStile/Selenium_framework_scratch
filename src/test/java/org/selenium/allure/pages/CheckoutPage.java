@@ -26,12 +26,6 @@ public class CheckoutPage extends BasicPage {
     @FindBy(how = How.ID, using = "submit")
     private WebElement submitButton;
 
-//    @FindBy(how = How.ID, using = "payment-method")
-//    private WebElement paymentMethodSelect;
-
-//    @FindBy(how = How.ID, using = "delivery-method")
-//    private WebElement deliveryMethodSelect;
-
     public CheckoutPage(WebDriver driver) {
         super(driver);
     }
