@@ -21,7 +21,6 @@ public class TestAuto {
         StepDefinitions steps = new StepDefinitions(driver);
         steps.completeOrder();
 
-
         ((JavascriptExecutor) driver).executeScript("window.open()");
         ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(1));
@@ -39,3 +38,4 @@ public class TestAuto {
         driver.quit();
     }
 }
+
