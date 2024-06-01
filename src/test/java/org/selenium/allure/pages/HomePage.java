@@ -37,9 +37,10 @@ public class HomePage extends BasicPage {
     }
 
     public void selectProductWithColor(String colorValue) {
-        WebElement colorPicker = driver.findElement(By.xpath("//label[contains(@class, 'colors__label')]//span[contains(@style, 'rgb(250, 250, 250)')]"));
+        WebElement colorPicker = driver.findElement(By.xpath("//span[contains(@style, '250,')]"));
         colorPicker.click();
     }
+
 
     public void selectMemory(String memory) {
         String checkboxSelector = "input[type='checkbox'][name='volume'][value='" + memory + "']";

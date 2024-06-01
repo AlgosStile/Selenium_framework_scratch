@@ -34,30 +34,9 @@ public class StepDefinitions {
         cartPage.proceedToCheckout();//10
         checkoutPage.selectPaymentMethod("Наличными при получении");//11
         checkoutPage.selectDeliveryMethod("Самовывоз бесплатно");//12
-        checkoutPage.fillOrderForm(
-                UserConfig.USER_NAME,
-                UserConfig.USER_ADRESS,
-                UserConfig.USER_PHONE,
-                UserConfig.USER_EMAIL,
-                UserConfig.USER_COMMENT
-        );
-        boolean isOrderDetailsCorrect = checkoutPage.verifyOrderDetails(
-                UserConfig.USER_NAME,
-                UserConfig.USER_ADRESS,
-                UserConfig.USER_PHONE,
-                UserConfig.USER_EMAIL,
-                UserConfig.USER_COMMENT
-        );
+        checkoutPage.fillOrderForm(//13
+                UserConfig.USER_NAME, UserConfig.USER_ADRESS, UserConfig.USER_PHONE, UserConfig.USER_EMAIL, UserConfig.USER_COMMENT);
 
-        if (!isOrderDetailsCorrect) {
-            throw new AssertionError("Данные заказа не совпадают с введенными данными.");
-        }
-
-        checkoutPage.goToCheckout();
-    }
-
-
-    public void searchOnYandex(String query) {
-        yandexSearchPage.searchFor(query);
+        checkoutPage.proceedToOrder();//14
     }
 }

@@ -2,8 +2,10 @@ package org.selenium.allure;
 
 
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.selenium.allure.steps.StepDefinitions;
 
@@ -22,26 +24,22 @@ public class TestAuto {
 
         StepDefinitions steps = new StepDefinitions(driver);
 
-        // Выполнение шагов теста
         steps.completeOrder();
 
         ((JavascriptExecutor) driver).executeScript("window.open()");
         ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(1));
-        driver.get("https://ya.ru");
+        driver.get("https://www.google.ru/");
 
-        steps.searchOnYandex("купить последнюю модель samsung за 100000 руб");
+        WebElement searchBox = driver.findElement(By.xpath("//textarea[@name='q']"));
+        searchBox.sendKeys("Купить последнюю модель мобильного телефона Samsung за 100.000 руб");
+        WebElement searchButton = driver.findElement(By.xpath("/html/body/div[1]/div[3]/form/div[1]/div[1]/div[4]/center/input[1]"));
 
-//        try {
-//            Thread.sleep(5000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
+        searchButton.click();
 
+        Thread.sleep(5000);
         driver.close();
-
         driver.switchTo().window(tabs.get(0));
-
         driver.quit();
     }
 }

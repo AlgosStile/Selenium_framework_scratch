@@ -20,5 +20,4 @@ public class CartPage extends BasicPage {
         WebElement checkoutButton = driver.findElement(By.cssSelector("button.cart__button.button.button--primery"));
         checkoutButton.click();
     }
-
 }

@@ -4,34 +4,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
 public class CheckoutPage extends BasicPage {
-
-    @FindBy(how = How.XPATH, using = "//input[@placeholder='Введите ваше полное имя']")
-    private WebElement fioField;
-
-    @FindBy(how = How.NAME, using = "address")
-    private WebElement addressField;
-
-    @FindBy(how = How.NAME, using = "phone")
-    private WebElement phoneField;
-
-    @FindBy(how = How.NAME, using = "email")
-    private WebElement emailField;
-
-    @FindBy(how = How.CSS, using = "textarea.form__input.form__input--area")
-    private WebElement commentField;
-
-    @FindBy(how = How.CSS, using = "button.cart__button.button.button--primery")
-    private WebElement submitButton;
-
-
     public CheckoutPage(WebDriver driver) {
         super(driver);
     }
@@ -42,30 +20,38 @@ public class CheckoutPage extends BasicPage {
 
     public void fillOrderForm(String fio, String address, String phone, String email, String comment) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOf(fioField));
-        fioField.clear();
-        fioField.sendKeys(fio);
 
-        wait.until(ExpectedConditions.visibilityOf(addressField));
-        addressField.clear();
-        addressField.sendKeys(address);
+        By fioLocator = By.xpath("//input[@placeholder='Введите ваше полное имя']");
+        By addressLocator = By.name("address");
+        By phoneLocator = By.name("phone");
+        By emailLocator = By.name("email");
+        By commentLocator = By.cssSelector("textarea.form__input.form__input--area");
+        By submitButtonLocator = By.cssSelector("button.cart__button.button.button--primery");
 
-        wait.until(ExpectedConditions.visibilityOf(phoneField));
-        phoneField.clear();
-        phoneField.sendKeys(phone);
 
-        wait.until(ExpectedConditions.visibilityOf(emailField));
-        emailField.clear();
-        emailField.sendKeys(email);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(fioLocator));
+        driver.findElement(fioLocator).clear();
+        driver.findElement(fioLocator).sendKeys(fio);
 
-        wait.until(ExpectedConditions.visibilityOf(commentField));
-        commentField.clear();
-        commentField.sendKeys(comment);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(addressLocator));
+        driver.findElement(addressLocator).clear();
+        driver.findElement(addressLocator).sendKeys(address);
 
-        wait.until(ExpectedConditions.elementToBeClickable(submitButton));
-        submitButton.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(phoneLocator));
+        driver.findElement(phoneLocator).clear();
+        driver.findElement(phoneLocator).sendKeys(phone);
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(emailLocator));
+        driver.findElement(emailLocator).clear();
+        driver.findElement(emailLocator).sendKeys(email);
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(commentLocator));
+        driver.findElement(commentLocator).clear();
+        driver.findElement(commentLocator).sendKeys(comment);
+
+        wait.until(ExpectedConditions.elementToBeClickable(submitButtonLocator));
+        driver.findElement(submitButtonLocator).click();
     }
-
 
     public boolean verifyOrderDetails(String fio, String address, String phone, String email, String comment) {
         WebElement fioInfo = driver.findElement(By.id("order-fio"));
@@ -92,6 +78,12 @@ public class CheckoutPage extends BasicPage {
         WebElement deliveryMethodOption = driver.findElement(By.xpath("//label[contains(.,'Самовывоз')]"));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", deliveryMethodOption);
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", deliveryMethodOption);
+        new WebDriverWait(driver, Duration.ofSeconds(5));
+    }
+
+    public void proceedToOrder() {
+        WebElement breadcrumbsLink = driver.findElement(By.cssSelector("a.breadcrumbs__link"));
+        breadcrumbsLink.click();
     }
 
 }
