@@ -21,27 +21,21 @@ public class StepDefinitions {
     }
 
     public void completeOrder() {
-        homePage.selectProductCategory("Телефоны");
-        homePage.setPriceRange(1000, 30000);
-        homePage.selectProductWithColor("rgb(250, 250, 250)");
-        homePage.selectMemory("8 Гб");
-        homePage.applyFilters();
-        homePage.addFirstProductToCart();
-        homePage.goToCart();
-        cartPage.increaseProductQuantity();
-        cartPage.proceedToCheckout();
-        cartPage.setProductQuantity(2);
-        cartPage.increaseProductQuantity();
-        checkoutPage.selectPaymentMethod("Наличными при получении");
-        checkoutPage.selectDeliveryMethod("Самовывоз бесплатно");
-        checkoutPage.selectPaymentMethod("Картой при получении");
-        checkoutPage.selectDeliveryMethod("Курьером");
+        homePage.setPriceRange(1000, 30000);//1
+        homePage.selectProductWithColor("rgb(250, 250, 250)");//2
+        homePage.selectMemory("8");//3
+        homePage.selectProductCategory("Телефоны");//4
+        homePage.applyFilters();//5
+        homePage.addFirstProductToCart();//6
+        homePage.goToCart();//7
+        homePage.goToCartHeader();//8
+        cartPage.increaseProductQuantity();//9
+        cartPage.proceedToCheckout();//10
+        checkoutPage.selectPaymentMethod("Наличными при получении");//11
+        checkoutPage.selectDeliveryMethod("Самовывоз бесплатно");//12
         checkoutPage.goToCheckout();
-        checkoutPage.selectFirstAvailableProduct();
-        checkoutPage.proceedToCheckout();
 
 
-        checkoutPage.selectPaymentMethodCash();
         checkoutPage.selectDeliveryMethodPickup();
         checkoutPage.goToCheckout();
 

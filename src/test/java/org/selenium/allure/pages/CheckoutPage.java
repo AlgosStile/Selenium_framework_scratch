@@ -1,6 +1,7 @@
 package org.selenium.allure.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -61,38 +62,32 @@ public class CheckoutPage extends BasicPage {
                 commentInfo.getText().equals(comment);
     }
 
-    public void selectFirstAvailableProduct() {
-        List<WebElement> products = driver.findElements(By.cssSelector(".product-item"));
-        if (!products.isEmpty()) {
-            WebElement firstProduct = products.get(0);
-            WebElement selectButton = firstProduct.findElement(By.cssSelector(".button--primery"));
-            selectButton.click();
-        } else {
-            throw new AssertionError("Товары не найдены.");
-        }
-    }
+//    public void selectFirstAvailableProduct() {
+//        List<WebElement> products = driver.findElements(By.cssSelector(".product-item"));
+//        if (!products.isEmpty()) {
+//            WebElement firstProduct = products.get(0);
+//            WebElement selectButton = firstProduct.findElement(By.cssSelector(".button--primery"));
+//            selectButton.click();
+//        } else {
+//            throw new AssertionError("Товары не найдены.");
+//        }
+//    }
 
 
     public void selectPaymentMethod(String paymentMethod) {
-        new Select(paymentMethodSelect).selectByVisibleText(paymentMethod);
-
+        WebElement paymentMethodLabel = driver.findElement(By.xpath("//label[contains(.,'Наличными при получении')]"));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", paymentMethodLabel);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", paymentMethodLabel);
     }
+
+
+
 
     public void selectDeliveryMethod(String deliveryMethod) {
-        new Select(deliveryMethodSelect).selectByVisibleText(deliveryMethod);
-
+        WebElement deliveryMethodOption = driver.findElement(By.xpath("//span[contains(text(),'Самовывоз') and contains(text(),'бесплатно')]/ancestor::label/input[@type='radio']"));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", deliveryMethodOption);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", deliveryMethodOption);
     }
 
-    public void selectPaymentMethodCash() {
-        new Select(paymentMethodSelect).selectByVisibleText("Наличными при получении");
-    }
-
-    public void selectDeliveryMethodPickup() {
-        new Select(deliveryMethodSelect).selectByVisibleText("Самовывоз бесплатно");
-    }
-
-    public void proceedToCheckout() {
-        submitButton.click();
-    }
 
 }
