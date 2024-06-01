@@ -29,9 +29,11 @@ public class CheckoutPage extends BasicPage {
 
     @FindBy(how = How.ID, using = "delivery-method")
     private WebElement deliveryMethodSelect;
+
     public CheckoutPage(WebDriver driver) {
         super(driver);
     }
+
     public void goToCheckout() {
         driver.get("https://algosstile.github.io/vue-app/index.html#/cart.html");
     }
@@ -44,6 +46,7 @@ public class CheckoutPage extends BasicPage {
         commentField.sendKeys(comment);
         submitButton.click();
     }
+
     public boolean verifyOrderDetails(String fio, String address, String phone, String email, String comment) {
         WebElement fioInfo = driver.findElement(By.id("order-fio"));
         WebElement addressInfo = driver.findElement(By.id("order-address"));
@@ -57,6 +60,7 @@ public class CheckoutPage extends BasicPage {
                 emailInfo.getText().equals(email) &&
                 commentInfo.getText().equals(comment);
     }
+
     public void selectFirstAvailableProduct() {
         List<WebElement> products = driver.findElements(By.cssSelector(".product-item"));
         if (!products.isEmpty()) {
@@ -78,6 +82,7 @@ public class CheckoutPage extends BasicPage {
         new Select(deliveryMethodSelect).selectByVisibleText(deliveryMethod);
 
     }
+
     public void selectPaymentMethodCash() {
         new Select(paymentMethodSelect).selectByVisibleText("Наличными при получении");
     }
@@ -85,9 +90,9 @@ public class CheckoutPage extends BasicPage {
     public void selectDeliveryMethodPickup() {
         new Select(deliveryMethodSelect).selectByVisibleText("Самовывоз бесплатно");
     }
+
     public void proceedToCheckout() {
         submitButton.click();
     }
-
 
 }

@@ -14,10 +14,6 @@ public class CartPage extends BasicPage {
     @FindBy(how = How.XPATH, using = "//button[text()='Оформить заказ']")
     private WebElement checkoutButton;
 
-    @FindBy(how = How.XPATH, using = "//div[@class='product']//button[text()='Выбрать']")
-    private WebElement selectProductButton;
-
-
     public CartPage(WebDriver driver) {
         super(driver);
     }

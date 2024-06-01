@@ -8,14 +8,12 @@ import org.selenium.allure.pages.HomePage;
 import org.selenium.allure.pages.YandexSearchPage;
 
 public class StepDefinitions {
-    private WebDriver driver;
-    private HomePage homePage;
-    private CheckoutPage checkoutPage;
-    private CartPage cartPage;
-    private YandexSearchPage yandexSearchPage;
+    private final HomePage homePage;
+    private final CheckoutPage checkoutPage;
+    private final CartPage cartPage;
+    private final YandexSearchPage yandexSearchPage;
 
     public StepDefinitions(WebDriver driver) {
-        this.driver = driver;
         homePage = new HomePage(driver);
         checkoutPage = new CheckoutPage(driver);
         cartPage = new CartPage(driver);
@@ -32,6 +30,7 @@ public class StepDefinitions {
         homePage.goToCart();
         cartPage.increaseProductQuantity();
         cartPage.proceedToCheckout();
+        cartPage.setProductQuantity(2);
         cartPage.increaseProductQuantity();
         checkoutPage.selectPaymentMethod("Наличными при получении");
         checkoutPage.selectDeliveryMethod("Самовывоз бесплатно");
@@ -39,6 +38,7 @@ public class StepDefinitions {
         checkoutPage.selectDeliveryMethod("Курьером");
         checkoutPage.goToCheckout();
         checkoutPage.selectFirstAvailableProduct();
+        checkoutPage.proceedToCheckout();
         checkoutPage.proceedToCheckout();
 
 
