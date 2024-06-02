@@ -1,0 +1,12 @@
+# Created at 2024-06-02T17:48:24.099
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+
+# Created at 2024-06-02T17:48:24.940
+SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+
+# Created at 2024-06-02T17:48:24.940
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+
+# Created at 2024-06-02T17:48:24.941
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+
