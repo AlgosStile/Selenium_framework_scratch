@@ -56,7 +56,6 @@ public class TestAuto {
 
         } finally {
             driver.close();
-//            driver.switchTo().window(tabs.get(0));
             driver.quit();//18
         }
     }
