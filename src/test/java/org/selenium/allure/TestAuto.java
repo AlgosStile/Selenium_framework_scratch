@@ -1,6 +1,5 @@
 package org.selenium.allure;
 
-
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -8,40 +7,53 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.selenium.allure.steps.StepDefinitions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.ArrayList;
 
+/**
+ * Класс TestAuto представляет автоматизированный тестовый сценарий.
+ */
 public class TestAuto {
-    private static WebDriver driver;
+    /**
+     * Метод testOrderFlow выполняет тестирование потока заказа.
+     *
+     * @throws InterruptedException если возникает прерывание выполнения.
+     */
 
     @Test
     public void testOrderFlow() throws InterruptedException {
         System.setProperty("webdriver.chrome.driver", "D:\\Program Files\\webdrivers\\chromedriver.exe");
-        driver = new ChromeDriver();
+        WebDriver driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.get("https://algosstile.github.io/vue-app/index.html");
 
         StepDefinitions steps = new StepDefinitions(driver);
-
         steps.completeOrder();
 
-        ((JavascriptExecutor) driver).executeScript("window.open()");//15
+        ((JavascriptExecutor) driver).executeScript("window.open()");
         ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(1));
         driver.get("https://www.google.ru/");
 
-        WebElement searchBox = driver.findElement(By.xpath("//textarea[@name='q']"));//16
+        /**
+         * Явное ожидание загрузки поисковой строки для избежания возможных конфликтов
+         * */
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement searchBox = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("q")));
         searchBox.sendKeys("Купить последнюю модель мобильного телефона Samsung за 100.000 руб");
-        WebElement searchButton = driver.findElement(By.xpath("/html/body/div[1]/div[3]/form/div[1]/div[1]/div[4]/center/input[1]"));
 
-        searchButton.click();//17
+        /**
+         * Использование абсолютного XPath-локатора, не является хорошей практикой,
+         * но в этом была острая необходимость).
+         * */
+        WebElement searchButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div[1]/div[3]/form/div[1]/div[1]/div[4]/center/input[1]")));
+        searchButton.click();
 
-        Thread.sleep(5000);//18
         driver.close();
         driver.switchTo().window(tabs.get(0));
         driver.quit();
     }
 }
-
-
