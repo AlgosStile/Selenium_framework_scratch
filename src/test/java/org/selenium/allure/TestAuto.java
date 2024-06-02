@@ -33,7 +33,7 @@ public class TestAuto {
         StepDefinitions steps = new StepDefinitions(driver);
         steps.completeOrder();
 
-        ((JavascriptExecutor) driver).executeScript("window.open()");
+        ((JavascriptExecutor) driver).executeScript("window.open()");//15
         ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(1));
         driver.get("https://www.google.ru/");
@@ -42,8 +42,8 @@ public class TestAuto {
          * Явное ожидание загрузки поисковой строки для избежания возможных конфликтов
          * */
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement searchBox = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("q")));
-        searchBox.sendKeys("Купить последнюю модель мобильного телефона Samsung за 100.000 руб");
+        WebElement searchBox = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("q")));//16
+        searchBox.sendKeys("Купить последнюю модель мобильного телефона Samsung за 100.000 руб");//17
 
         /**
          * Использование абсолютного XPath-локатора, не является хорошей практикой,
@@ -54,6 +54,6 @@ public class TestAuto {
 
         driver.close();
         driver.switchTo().window(tabs.get(0));
-        driver.quit();
+        driver.quit();//18
     }
 }
