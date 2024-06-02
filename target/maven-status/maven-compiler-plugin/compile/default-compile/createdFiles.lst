@@ -1,0 +1,7 @@
+org\selenium\allure\pages\GoogleSearchPage.class
+org\selenium\allure\pages\CheckoutPage.class
+org\selenium\allure\steps\StepDefinitions.class
+org\selenium\allure\pages\HomePage.class
+org\selenium\allure\config\UserConfig.class
+org\selenium\allure\pages\CartPage.class
+org\selenium\allure\pages\BasicPage.class

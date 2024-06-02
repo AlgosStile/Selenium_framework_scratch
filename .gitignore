@@ -38,6 +38,6 @@ build/
 .DS_Store
 
 ### Allure & target ###
-.allure
-/target
+#.allure
+#/target
 
