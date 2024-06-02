@@ -5,7 +5,6 @@ import org.selenium.allure.config.UserConfig;
 import org.selenium.allure.pages.CartPage;
 import org.selenium.allure.pages.CheckoutPage;
 import org.selenium.allure.pages.HomePage;
-import org.selenium.allure.pages.GoogleSearchPage;
 
 /**
  * Класс StepDefinitions содержит шаги для автоматизированного тестирования сценариев.
@@ -15,7 +14,6 @@ public class StepDefinitions {
     private final HomePage homePage;
     private final CheckoutPage checkoutPage;
     private final CartPage cartPage;
-    private final GoogleSearchPage yandexSearchPage;
 
     /**
      * Конструктор класса StepDefinitions.
@@ -26,7 +24,6 @@ public class StepDefinitions {
         homePage = new HomePage(driver);
         checkoutPage = new CheckoutPage(driver);
         cartPage = new CartPage(driver);
-        yandexSearchPage = new GoogleSearchPage(driver);
     }
 
     /**
