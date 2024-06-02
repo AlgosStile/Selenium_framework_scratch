@@ -6,9 +6,9 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.selenium.allure.steps.StepDefinitions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.selenium.allure.steps.StepDefinitions;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -31,29 +31,34 @@ public class TestAuto {
         driver.get("https://algosstile.github.io/vue-app/index.html");
 
         StepDefinitions steps = new StepDefinitions(driver);
-        steps.completeOrder();
 
-        ((JavascriptExecutor) driver).executeScript("window.open()");//15
-        ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
-        driver.switchTo().window(tabs.get(1));
-        driver.get("https://www.google.ru/");
+        try {
+            steps.completeOrder();
 
-        /**
-         * Явное ожидание загрузки поисковой строки для избежания возможных конфликтов
-         * */
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement searchBox = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("q")));//16
-        searchBox.sendKeys("Купить последнюю модель мобильного телефона Samsung за 100.000 руб");//17
+            ((JavascriptExecutor) driver).executeScript("window.open()");//15
+            ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
+            driver.switchTo().window(tabs.get(1));
+            driver.get("https://www.google.ru/");
 
-        /**
-         * Использование абсолютного XPath-локатора, не является хорошей практикой,
-         * но в этом была острая необходимость).
-         * */
-        WebElement searchButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div[1]/div[3]/form/div[1]/div[1]/div[4]/center/input[1]")));
-        searchButton.click();
+            /**
+             * Явное ожидание загрузки поисковой строки для избежания возможных конфликтов
+             * */
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            WebElement searchBox = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("q")));//16
+            searchBox.sendKeys("Купить последнюю модель мобильного телефона Samsung за 100.000 руб");//17
 
-        driver.close();
-        driver.switchTo().window(tabs.get(0));
-        driver.quit();//18
+            /**
+             * Использование абсолютного XPath-локатора, не является хорошей практикой,
+             * но в этом была острая необходимость).
+             * */
+            WebElement searchButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div[1]/div[3]/form/div[1]/div[1]/div[4]/center/input[1]")));
+            searchButton.click();
+
+        } finally {
+            driver.close();
+//            driver.switchTo().window(tabs.get(0));
+            driver.quit();//18
+        }
     }
 }
+
