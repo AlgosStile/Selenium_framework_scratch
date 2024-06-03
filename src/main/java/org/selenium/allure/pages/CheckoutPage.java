@@ -20,9 +20,6 @@ public class CheckoutPage extends BasicPage {
         super(driver);
     }
 
-    public void goToCheckout() {
-        driver.get("https://algosstile.github.io/vue-app/index.html#/cart.html");
-    }
     @Step("Fill order form")
     public void fillOrderForm() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -58,6 +55,7 @@ public class CheckoutPage extends BasicPage {
         driver.findElement(submitButtonLocator).click();
     }
 
+    @Step("Verify order details")
     public boolean verifyOrderDetails(String fio, String address, String phone, String email, String comment) {
         WebElement fioInfo = driver.findElement(By.id("order-fio"));
         WebElement addressInfo = driver.findElement(By.id("order-address"));

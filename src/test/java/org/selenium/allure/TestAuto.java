@@ -9,7 +9,6 @@ public class TestAuto extends BaseTest {
     public void testOrderFlow() {
         driver.get("https://algosstile.github.io/vue-app/index.html");
 
-
         StepDefinitions steps = new StepDefinitions(driver);
         steps.setPriceRangeAndSelectProductCategory(1000, 30000, "Телефоны");
         steps.applyFiltersAndAddFirstProductToCart();
