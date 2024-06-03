@@ -101,6 +101,7 @@ public class StepDefinitions {
         checkoutPage.proceedToOrder();
         return checkoutPage;
     }
+
     @Step("Search for {query}")
     public GoogleSearchPage search(String query) {
         googleSearchPage.openNewTab();
