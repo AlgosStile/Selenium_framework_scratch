@@ -13,13 +13,17 @@ import java.time.Duration;
 
 /**
  * Класс CheckoutPage представляет страницу оформления заказа.
+ * Наследуется от класса BasicPage и использует его методы и поля.
  */
 public class CheckoutPage extends BasicPage {
 
     public CheckoutPage(WebDriver driver) {
         super(driver);
     }
-
+    /**
+     * Заполнить форму заказа данными пользователя.
+     * Использует конфигурацию пользователя для заполнения формы.
+     */
     @Step("Fill order form")
     public void fillOrderForm() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -65,13 +69,22 @@ public class CheckoutPage extends BasicPage {
 
         return fioInfo.getText().equals(fio) && addressInfo.getText().equals(address) && phoneInfo.getText().equals(phone) && emailInfo.getText().equals(email) && commentInfo.getText().equals(comment);
     }
-
+    /**
+     * Выбрать способ оплаты.
+     * Прокручивает страницу до выбранного способа оплаты и кликает по нему.
+     * @param paymentMethod Способ оплаты, который необходимо выбрать.
+     */
     @Step("Select payment method")
     public void selectPaymentMethod(String paymentMethod) {
         WebElement paymentMethodLabel = driver.findElement(By.xpath("//label[contains(.,'" + paymentMethod + "')]"));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", paymentMethodLabel);
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", paymentMethodLabel);
     }
+    /**
+     * Выбрать способ доставки.
+     * Прокручивает страницу до выбранного способа доставки и кликает по нему.
+     * @param deliveryMethod Способ доставки, который необходимо выбрать.
+     */
     @Step("Select delivery method")
     public void selectDeliveryMethod(String deliveryMethod) {
         WebElement deliveryMethodOption = driver.findElement(By.xpath("//label[contains(.,'" + deliveryMethod + "')]"));
@@ -79,7 +92,10 @@ public class CheckoutPage extends BasicPage {
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", deliveryMethodOption);
         new WebDriverWait(driver, Duration.ofSeconds(5));
     }
-
+    /**
+     * Продолжить оформление заказа.
+     * Кликает по ссылке "breadcrumbs", чтобы перейти на предыдущую страницу.
+     */
     @Step("Proceed to order")
     public void proceedToOrder() {
         WebElement breadcrumbsLink = driver.findElement(By.cssSelector("a.breadcrumbs__link"));
