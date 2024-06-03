@@ -90,11 +90,7 @@ public class CheckoutPage extends BasicPage {
         WebElement emailInfo = driver.findElement(By.id("order-email"));
         WebElement commentInfo = driver.findElement(By.id("order-comment"));
 
-        return fioInfo.getText().equals(fio) &&
-                addressInfo.getText().equals(address) &&
-                phoneInfo.getText().equals(phone) &&
-                emailInfo.getText().equals(email) &&
-                commentInfo.getText().equals(comment);
+        return fioInfo.getText().equals(fio) && addressInfo.getText().equals(address) && phoneInfo.getText().equals(phone) && emailInfo.getText().equals(email) && commentInfo.getText().equals(comment);
     }
 
     /**
