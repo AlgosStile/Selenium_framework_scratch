@@ -40,5 +40,6 @@ build/
 ### Allure & target ###
 .allure
 /target
+.target
 
 
