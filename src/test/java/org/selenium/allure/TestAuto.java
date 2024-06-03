@@ -48,11 +48,10 @@ public class TestAuto {
             searchBox.sendKeys("Купить последнюю модель мобильного телефона Samsung за 100.000 руб");//17
 
             /**
-             * Использование абсолютного XPath-локатора, не является хорошей практикой,
-             * но в этом была острая необходимость).
+             * Использование относительного XPath-локатора
              * */
-            WebElement searchButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div[1]/div[3]/form/div[1]/div[1]/div[4]/center/input[1]")));
-            searchButton.click();
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//ul")));
+            searchBox.submit();
 
         } finally {
             driver.close();
