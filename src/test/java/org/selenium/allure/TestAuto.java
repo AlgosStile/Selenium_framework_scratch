@@ -48,7 +48,7 @@ public class TestAuto {
             searchBox.sendKeys("Купить последнюю модель мобильного телефона Samsung за 100.000 руб");//17
 
             /**
-             * Использование относительного XPath-локатора
+             * Использование относительного XPath-локатора - поиск элемента кнопка "Поиск"
              * */
             wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//ul")));
             searchBox.submit();
