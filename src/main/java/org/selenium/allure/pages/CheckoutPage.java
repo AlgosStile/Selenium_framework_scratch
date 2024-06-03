@@ -1,5 +1,6 @@
 package org.selenium.allure.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -22,7 +23,7 @@ public class CheckoutPage extends BasicPage {
     public void goToCheckout() {
         driver.get("https://algosstile.github.io/vue-app/index.html#/cart.html");
     }
-
+    @Step("Fill order form")
     public void fillOrderForm() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -67,17 +68,13 @@ public class CheckoutPage extends BasicPage {
         return fioInfo.getText().equals(fio) && addressInfo.getText().equals(address) && phoneInfo.getText().equals(phone) && emailInfo.getText().equals(email) && commentInfo.getText().equals(comment);
     }
 
-    /**
-     * Выбирает способ оплаты.
-     *
-     * @param paymentMethod Способ оплаты.
-     */
+    @Step("Select payment method")
     public void selectPaymentMethod(String paymentMethod) {
         WebElement paymentMethodLabel = driver.findElement(By.xpath("//label[contains(.,'" + paymentMethod + "')]"));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", paymentMethodLabel);
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", paymentMethodLabel);
     }
-
+    @Step("Select delivery method")
     public void selectDeliveryMethod(String deliveryMethod) {
         WebElement deliveryMethodOption = driver.findElement(By.xpath("//label[contains(.,'" + deliveryMethod + "')]"));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", deliveryMethodOption);
@@ -85,7 +82,7 @@ public class CheckoutPage extends BasicPage {
         new WebDriverWait(driver, Duration.ofSeconds(5));
     }
 
-
+    @Step("Proceed to order")
     public void proceedToOrder() {
         WebElement breadcrumbsLink = driver.findElement(By.cssSelector("a.breadcrumbs__link"));
         breadcrumbsLink.click();

@@ -1,5 +1,6 @@
 package org.selenium.allure.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,28 +10,18 @@ import org.openqa.selenium.WebElement;
  */
 public class CartPage extends BasicPage {
 
-    /**
-     * Конструктор класса CartPage, принимающий веб-драйвер.
-     *
-     * @param driver Веб-драйвер для инициализации страницы корзины.
-     */
     public CartPage(WebDriver driver) {
         super(driver);
     }
 
-    /**
-     * Увеличивает количество продукта в корзине.
-     * Нажимает на кнопку увеличения количества товара дважды.
-     */
+    @Step("Increase product quantity")
     public void increaseProductQuantity() {
         WebElement increaseQuantityButton = driver.findElement(By.cssSelector("button[aria-label='Добавить один товар']"));
         increaseQuantityButton.click();
         increaseQuantityButton.click();
     }
 
-    /**
-     * Переходит к оформлению заказа, нажимая на кнопку "Оформить заказ".
-     */
+    @Step("Proceed to checkout")
     public void proceedToCheckout() {
         WebElement checkoutButton = driver.findElement(By.cssSelector("button.cart__button.button.button--primery"));
         checkoutButton.click();
