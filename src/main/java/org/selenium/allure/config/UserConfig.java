@@ -1,33 +1,36 @@
 package org.selenium.allure.config;
 
-/**
- * Класс для хранения конфигурационных данных пользователя.
- */
+import java.io.InputStream;
+import java.util.Properties;
+
 public class UserConfig {
+    private static Properties properties = new Properties();
 
-    /**
-     * Имя пользователя.
-     */
-    public static final String USER_NAME = "Prometheus Selenium Allurement";
+    static {
+        try (InputStream input = UserConfig.class.getClassLoader().getResourceAsStream("config.properties")) {
+            properties.load(input);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-    /**
-     * Адрес пользователя.
-     */
-    public static final String USER_ADRESS = "Курск, ул. Ленина, 12, кв. 1";
+    public static String getUser() {
+        return properties.getProperty("user");
+    }
 
-    /**
-     * Номер телефона пользователя.
-     */
-    public static final String USER_PHONE = "+78005553535";
+    public static String getUserAddress() {
+        return properties.getProperty("user_address");
+    }
 
-    /**
-     * Электронная почта пользователя.
-     */
-    public static final String USER_EMAIL = "test@example.com";
+    public static String getUserPhone() {
+        return properties.getProperty("user_phone");
+    }
 
-    /**
-     * Комментарий пользователя.
-     */
-    public static final String USER_COMMENT = "Второй этаж. Быстрое оформление. Спасибо!.";
+    public static String getUserEmail() {
+        return properties.getProperty("user_email");
+    }
 
+    public static String getUserComment() {
+        return properties.getProperty("user_comment");
+    }
 }

@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.selenium.allure.config.UserConfig;
 
 import java.time.Duration;
 
@@ -14,32 +15,15 @@ import java.time.Duration;
  */
 public class CheckoutPage extends BasicPage {
 
-    /**
-     * Конструктор класса CheckoutPage, принимающий веб-драйвер.
-     *
-     * @param driver Веб-драйвер для инициализации страницы оформления заказа.
-     */
     public CheckoutPage(WebDriver driver) {
         super(driver);
     }
 
-    /**
-     * Переходит на страницу оформления заказа.
-     */
     public void goToCheckout() {
         driver.get("https://algosstile.github.io/vue-app/index.html#/cart.html");
     }
 
-    /**
-     * Заполняет форму заказа данными.
-     *
-     * @param fio     ФИО пользователя.
-     * @param address Адрес доставки.
-     * @param phone   Номер телефона.
-     * @param email   Email адрес.
-     * @param comment Комментарий к заказу.
-     */
-    public void fillOrderForm(String fio, String address, String phone, String email, String comment) {
+    public void fillOrderForm() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         By fioLocator = By.xpath("//input[@placeholder='Введите ваше полное имя']");
@@ -51,38 +35,28 @@ public class CheckoutPage extends BasicPage {
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(fioLocator));
         driver.findElement(fioLocator).clear();
-        driver.findElement(fioLocator).sendKeys(fio);
+        driver.findElement(fioLocator).sendKeys(UserConfig.getUser());
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(addressLocator));
         driver.findElement(addressLocator).clear();
-        driver.findElement(addressLocator).sendKeys(address);
+        driver.findElement(addressLocator).sendKeys(UserConfig.getUserAddress());
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(phoneLocator));
         driver.findElement(phoneLocator).clear();
-        driver.findElement(phoneLocator).sendKeys(phone);
+        driver.findElement(phoneLocator).sendKeys(UserConfig.getUserPhone());
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(emailLocator));
         driver.findElement(emailLocator).clear();
-        driver.findElement(emailLocator).sendKeys(email);
+        driver.findElement(emailLocator).sendKeys(UserConfig.getUserEmail());
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(commentLocator));
         driver.findElement(commentLocator).clear();
-        driver.findElement(commentLocator).sendKeys(comment);
+        driver.findElement(commentLocator).sendKeys(UserConfig.getUserComment());
 
         wait.until(ExpectedConditions.elementToBeClickable(submitButtonLocator));
         driver.findElement(submitButtonLocator).click();
     }
 
-    /**
-     * Проверяет данные заказа на странице подтверждения.
-     *
-     * @param fio     Ожидаемое ФИО.
-     * @param address Ожидаемый адрес.
-     * @param phone   Ожидаемый номер телефона.
-     * @param email   Ожидаемый email адрес.
-     * @param comment Ожидаемый комментарий.
-     * @return true, если данные заказа совпадают; в противном случае - false.
-     */
     public boolean verifyOrderDetails(String fio, String address, String phone, String email, String comment) {
         WebElement fioInfo = driver.findElement(By.id("order-fio"));
         WebElement addressInfo = driver.findElement(By.id("order-address"));
@@ -104,11 +78,6 @@ public class CheckoutPage extends BasicPage {
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", paymentMethodLabel);
     }
 
-    /**
-     * Выбирает способ доставки.
-     *
-     * @param deliveryMethod Способ доставки.
-     */
     public void selectDeliveryMethod(String deliveryMethod) {
         WebElement deliveryMethodOption = driver.findElement(By.xpath("//label[contains(.,'" + deliveryMethod + "')]"));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", deliveryMethodOption);
@@ -116,9 +85,7 @@ public class CheckoutPage extends BasicPage {
         new WebDriverWait(driver, Duration.ofSeconds(5));
     }
 
-    /**
-     * Переходит к оформлению заказа.
-     */
+
     public void proceedToOrder() {
         WebElement breadcrumbsLink = driver.findElement(By.cssSelector("a.breadcrumbs__link"));
         breadcrumbsLink.click();
