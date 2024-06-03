@@ -47,7 +47,6 @@ public class HomePage extends BasicPage {
         maxPriceInput.sendKeys(String.valueOf(maxPrice));
     }
 
-
     public void selectMemory(String memory) {
         String checkboxSelector = "input[type='checkbox'][name='volume'][value='" + memory + "']";
         WebElement memoryCheckbox = driver.findElement(By.cssSelector(checkboxSelector));
